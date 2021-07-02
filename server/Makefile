@@ -6,7 +6,7 @@
 #    By: hyospark <hyospark@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/02 09:25:26 by hyospark          #+#    #+#              #
-#    Updated: 2021/07/02 17:16:22 by hyospark         ###   ########.fr        #
+#    Updated: 2021/07/02 17:25:56 by hyospark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,7 @@ OBJECT = main.o \
 		utils.o
 
 $(NAME): $(OBJECT)
-	ar	rcs $(NAME) $(OBJECT)
-	gcc $(MAIN) $(CFLAGS) $(LIB) -o $(OUT)
+	gcc $(SOURCE) $(CFLAGS) -o $(OUT)
 $(OBJECT): $(SOURCE)
 	gcc $(CFLAGS) -c $(SOURCE)
 
