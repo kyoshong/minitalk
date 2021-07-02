@@ -3,14 +3,12 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hyospark <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: hyospark <hyospark@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/07/02 12:07:25 by hyospark          #+#    #+#              #
-#    Updated: 2021/07/02 12:07:27 by hyospark         ###   ########.fr        #
+#    Created: 2021/07/02 09:25:26 by hyospark          #+#    #+#              #
+#    Updated: 2021/07/02 12:07:45 by hyospark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
-
 
 NAME = libpushswap.a
 CFLAGS = -Wall -Wextra -Werror
