@@ -6,7 +6,7 @@
 /*   By: hyospark <hyospark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 18:12:19 by hyospark          #+#    #+#             */
-/*   Updated: 2021/07/01 18:13:25 by hyospark         ###   ########.fr       */
+/*   Updated: 2021/07/04 00:54:58 by hyospark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,13 @@ static int	cheak_size(long n)
 		count++;
 	}
 	return (count);
+}
+
+void	error_exit(int *tem)
+{
+	printf("Error\n");
+	free(tem);
+	exit(0);
 }
 
 char		*ft_itoa(int n)

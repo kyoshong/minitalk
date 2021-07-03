@@ -6,7 +6,7 @@
 /*   By: hyospark <hyospark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 17:58:13 by hyospark          #+#    #+#             */
-/*   Updated: 2021/07/02 22:56:13 by hyospark         ###   ########.fr       */
+/*   Updated: 2021/07/04 02:22:25 by hyospark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
-//utils
 
-struct sigaction s_siga;
+struct sigaction s_siga_zero;
+struct sigaction s_siga_one;
 
 typedef struct s_info
 {
-	int		client_pid;
-	int		*msg;
+	int		msg;
+	int		check;
 }				t_info;
-
+t_info 	*info;
 char		*ft_itoa(int n);
 size_t		ft_strlen(char const *str);
 
