@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   itoa.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyospark <hyospark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/01 18:12:27 by hyospark          #+#    #+#             */
-/*   Updated: 2021/07/04 00:51:33 by hyospark         ###   ########.fr       */
+/*   Created: 2021/07/01 18:12:19 by hyospark          #+#    #+#             */
+/*   Updated: 2021/07/06 00:13:21 by hyospark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "server.h"
+#include "client.h"
 
-size_t	ft_strlen(char const *str)
+size_t		ft_strlen(const char *str)
 {
 	size_t	i;
 
@@ -33,6 +33,13 @@ static int	cheak_size(long n)
 		count++;
 	}
 	return (count);
+}
+
+void		error_exit(int *tem)
+{
+	write(1, "Error\n", 6);
+	free(tem);
+	exit(0);
 }
 
 char		*ft_itoa(int n)

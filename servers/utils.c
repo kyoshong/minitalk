@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyospark <hyospark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/01 18:12:19 by hyospark          #+#    #+#             */
-/*   Updated: 2021/07/04 00:54:58 by hyospark         ###   ########.fr       */
+/*   Created: 2021/07/01 18:12:27 by hyospark          #+#    #+#             */
+/*   Updated: 2021/07/06 00:05:01 by hyospark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "client.h"
+#include "server.h"
 
-size_t	ft_strlen(char const *str)
+size_t		ft_strlen(char const *str)
 {
 	size_t	i;
 
@@ -33,13 +33,6 @@ static int	cheak_size(long n)
 		count++;
 	}
 	return (count);
-}
-
-void	error_exit(int *tem)
-{
-	printf("Error\n");
-	free(tem);
-	exit(0);
 }
 
 char		*ft_itoa(int n)

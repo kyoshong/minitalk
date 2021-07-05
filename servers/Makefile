@@ -6,19 +6,18 @@
 #    By: hyospark <hyospark@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/02 09:25:26 by hyospark          #+#    #+#              #
-#    Updated: 2021/07/02 17:25:55 by hyospark         ###   ########.fr        #
+#    Updated: 2021/07/04 17:48:02 by hyospark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = client
+NAME = server
 CFLAGS = -Wall -Wextra -Werror
-SOURCE = main.c \
-		utils.c \
-		atoi.c
-OUT = client
-OBJECT = main.o \
-		utils.o \
-		atoi.o
+SOURCE = server.c \
+		utils.c
+OUT = server
+OBJECT = server.o \
+		utils.o
+
 $(NAME): $(OBJECT)
 	gcc $(SOURCE) $(CFLAGS) -o $(OUT)
 $(OBJECT): $(SOURCE)

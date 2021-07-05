@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyospark <hyospark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 17:58:05 by hyospark          #+#    #+#             */
-/*   Updated: 2021/07/04 02:27:18 by hyospark         ###   ########.fr       */
+/*   Updated: 2021/07/06 00:40:34 by hyospark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,25 +20,26 @@ void	ft_print_server(char *num, int sig)
 		write(1, "server pid : ", 13);
 	write(1, num, ft_strlen(num));
 	write(1, "\n", 1);
+	free(num);
 }
 
-void		signal_handler(int signum, siginfo_t *siginfo, void *a)
+void	signal_handler(int signum, siginfo_t *siginfo, void *a)
 {
-	//char *pid;
-	static int	bits = 0;
-	static int	msg = 0;
-	char tem;
+	char		*pid;
+	static int	bits;
+	static int	msg;
+	static int	check;
+	char		tem;
 
-	printf("siginfo->si_pid : %d\n",siginfo->si_pid);
-	// if (siginfo->si_pid != info->check)
-	// {
-	// 	pid = ft_itoa(siginfo->si_pid);
-	// 	info->check = siginfo->si_pid;
-	// 	ft_print_server(pid, 1);
-	// }
+	if (siginfo->si_pid != check && siginfo->si_pid > 0)
+	{
+		pid = ft_itoa(siginfo->si_pid);
+		ft_print_server(pid, 1);
+		check = siginfo->si_pid;
+	}
 	if (signum == SIGUSR1)
 		bits = bits + (1 << (7 - msg));
-	msg += 1;
+	msg++;
 	if (msg == 8)
 	{
 		tem = bits;
@@ -49,13 +50,13 @@ void		signal_handler(int signum, siginfo_t *siginfo, void *a)
 	(void)a;
 }
 
-void	init_sig()
+void	init_sig(void)
 {
 	s_siga_zero.sa_sigaction = signal_handler;
 	s_siga_zero.sa_flags = SA_SIGINFO;
 }
 
-int		main()
+int		main(void)
 {
 	char *pid;
 
@@ -64,15 +65,15 @@ int		main()
 	init_sig();
 	if (sigaction(SIGUSR1, &s_siga_zero, NULL) < 0)
 	{
-		printf("Can't catch SIGUSR1 \n");
+		write(2, "Can't catch SIGUSR1 \n", 21);
 		return (1);
 	}
 	if (sigaction(SIGUSR2, &s_siga_zero, NULL) < 0)
 	{
-		printf("Can't catch SIGUSR1 \n");
+		write(2, "Can't catch SIGUSR2\n", 21);
 		return (1);
 	}
 	while (1)
 		pause();
-	return 0;
+	return (0);
 }

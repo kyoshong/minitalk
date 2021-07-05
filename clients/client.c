@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyospark <hyospark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 17:57:54 by hyospark          #+#    #+#             */
-/*   Updated: 2021/07/04 02:07:07 by hyospark         ###   ########.fr       */
+/*   Updated: 2021/07/06 00:24:28 by hyospark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ int		*binary_base(int num)
 	return (arr);
 }
 
-void		send_msg(char *msg, int pid)
+void	send_msg(char *msg, int pid)
 {
 	int i;
 	int j;
 	int *tem;
-	
+
 	i = 0;
 	while (msg[i])
 	{
@@ -53,54 +53,30 @@ void		send_msg(char *msg, int pid)
 		{
 			if (tem[j] && kill(pid, SIGUSR1) == -1)
 				error_exit(tem);
-			else if (!tem[j]&& kill(pid, SIGUSR2) == -1)
+			else if ((!tem[j]) && kill(pid, SIGUSR2) == -1)
 				error_exit(tem);
 			j++;
 			usleep(100);
 		}
 		free(tem);
-		i++;	
+		i++;
 	}
-}
-
-void		send_msg_length(int len, int pid)
-{
-	int *arr;
-	int i;
-
-	arr = binary_base(len);
-	i = 0;
-	while (i > 8)
-	{
-		if (arr[i] == 0)
-		{
-			kill(pid, SIGUSR1);
-			printf("\nSIGUSR1\n");
-		}
-		else
-		{
-			kill(pid, SIGUSR2);
-			printf("\nSIGUSR2\n");
-		}
-		i--;
-		usleep(100);
-	}
-	free(arr);
 }
 
 void	start_signal(char **argv)
 {
-	int pid;
-	char *msg;
-	int mypid;
+	int		pid;
+	char	*msg;
+	char	*mypid;
 
 	pid = ft_atoi(argv[1]);
 	msg = argv[2];
-	mypid = getpid();
-	printf("pid : %d", mypid);
-	//send_msg_length(ft_strlen(msg), pid);
+	mypid = ft_itoa(getpid());
+	write(1, "client pid : ", 13);
+	write(1, mypid, ft_strlen(mypid));
+	write(1, "\n", 1);
+	free(mypid);
 	send_msg(msg, pid);
-	
 }
 
 int		main(int argc, char *argv[])
@@ -111,6 +87,5 @@ int		main(int argc, char *argv[])
 	{
 		start_signal(argv);
 	}
-	return 0;
+	return (0);
 }
-

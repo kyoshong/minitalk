@@ -3,66 +3,41 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hyospark <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: hyospark <hyospark@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/02 12:07:25 by hyospark          #+#    #+#              #
-#    Updated: 2021/07/02 12:07:27 by hyospark         ###   ########.fr        #
+#    Updated: 2021/07/05 23:51:12 by hyospark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-
-
-NAME = libpushswap.a
+NAME = minitalk
 CFLAGS = -Wall -Wextra -Werror
-SOURCE = pushswap/push_swap.c \
-		pushswap/find_route.c \
-		pushswap/pre_push_swap.c \
-		pushswap/move_val.c \
-		pushswap/quick_sort.c \
-		pushswap/simple_push_swap.c \
-		pushswap/div_pivot.c \
-		pushswap/make_list.c \
-		utils/ft_atoi.c \
-		utils/ft_split.c \
-		utils/exception.c \
-		utils/commands.c \
-		utils/commands2.c \ 
-		utils/commands3.c \
-		utils/handle_deque.c \
-		utils/handle_deque2.c
+SERVER_SOURCE = servers/server.c \
+				servers/utils.c
+CLIENT_SOURCE = clients/client.c \
+				clients/atoi.c \
+				clients/itoa.c
+SERVER_OUT = server
+CLIENT_OUT = client
+SERVER_OBJECT = server.o \
+				utils.o
+CLIENT_OBJECT = client.o \
+				atoi.o \
+				itoa.o
 
-LIB = -L. -lpushswap
-MAIN = pushswap/main.c
-OUT = push_swap
-OBJECT = push_swap.o \
-		find_route.o \
-		pre_push_swap.o \
-		move_val.o \
-		commands.o \
-		commands2.o \
-		commands3.o \
-		quick_sort.o \
-		ft_atoi.o \
-		ft_split.o \
-		exception.o \
-		handle_deque.o \
-		handle_deque2.o \
-		simple_push_swap.o \
-		div_pivot.o \
-		make_list.o
-
-$(NAME): $(OBJECT)
-	ar	rcs $(NAME) $(OBJECT)
-	gcc $(MAIN) $(CFLAGS) $(LIB) -o $(OUT)
-$(OBJECT): $(SOURCE)
-	gcc $(CFLAGS) -c $(SOURCE)
-
+$(NAME): $(SERVER_OBJECT) $(CLIENT_OBJECT)
+$(SERVER_OBJECT): $(SERVER_SOURCE)
+	gcc $(CFLAGS) -c $(SERVER_SOURCE)
+	gcc $(SERVER_SOURCE) $(CFLAGS) -o $(SERVER_OUT)
+$(CLIENT_OBJECT): $(CLIENT_SOURCE)
+	gcc $(CFLAGS) -c $(CLIENT_SOURCE)
+	gcc $(CLIENT_SOURCE) $(CFLAGS) -o $(CLIENT_OUT)
 all : $(NAME)
 clean:
-	@rm -f $(OBJECT)
+	@rm -f $(CLIENT_OBJECT) $(SERVER_OBJECT)
 fclean: clean
 	@rm -f $(NAME)
-	@rm -f $(OUT)
+	@rm -f $(SERVER_OUT) $(CLIENT_OUT)
 re:	fclean all
 
 .PHONY: all clean fclean re
